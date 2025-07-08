@@ -29,7 +29,7 @@ export default async function handler(req, res) {
 
     // Verify the account belongs to the authenticated user
     const account = await Account.findById(accountId)
-    if (!account || account.userId.toString() !== session.user.id) {
+    if (!account || !account.userId || account.userId.toString() !== session.user.id) {
       return res.status(403).json({ error: "Access denied" })
     }
 
